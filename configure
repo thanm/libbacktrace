@@ -631,6 +631,8 @@ OTOOL
 LIPO
 NMEDIT
 DSYMUTIL
+lt_ECHO
+RANLIB
 AR
 OBJDUMP
 LN_S
@@ -641,7 +643,6 @@ LD
 FGREP
 SED
 LIBTOOL
-RANLIB
 MAINT
 MAINTAINER_MODE_FALSE
 MAINTAINER_MODE_TRUE
@@ -743,7 +744,6 @@ enable_fast_install
 with_gnu_ld
 enable_libtool_lock
 enable_largefile
-enable_cet
 with_system_libunwind
 enable_host_shared
 '
@@ -1386,8 +1386,6 @@ Optional Features:
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --disable-largefile     omit support for large files
-  --enable-cet            enable Intel CET in target libraries
-                          [default=default]
   --enable-host-shared    build host code as shared libraries
 
 Optional Packages:
@@ -2470,6 +2468,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 ac_config_headers="$ac_config_headers config.h"
+
 
 
 # with_target_subdir is used when configured as part of a GCC tree.
@@ -4937,99 +4936,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-if test -n "$ac_tool_prefix"; then
-  # Extract the first word of "${ac_tool_prefix}ranlib", so it can be a program name with args.
-set dummy ${ac_tool_prefix}ranlib; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_prog_RANLIB+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$RANLIB"; then
-  ac_cv_prog_RANLIB="$RANLIB" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_prog_RANLIB="${ac_tool_prefix}ranlib"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-RANLIB=$ac_cv_prog_RANLIB
-if test -n "$RANLIB"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $RANLIB" >&5
-$as_echo "$RANLIB" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-fi
-if test -z "$ac_cv_prog_RANLIB"; then
-  ac_ct_RANLIB=$RANLIB
-  # Extract the first word of "ranlib", so it can be a program name with args.
-set dummy ranlib; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_prog_ac_ct_RANLIB+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$ac_ct_RANLIB"; then
-  ac_cv_prog_ac_ct_RANLIB="$ac_ct_RANLIB" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_prog_ac_ct_RANLIB="ranlib"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-ac_ct_RANLIB=$ac_cv_prog_ac_ct_RANLIB
-if test -n "$ac_ct_RANLIB"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_ct_RANLIB" >&5
-$as_echo "$ac_ct_RANLIB" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-  if test "x$ac_ct_RANLIB" = x; then
-    RANLIB=":"
-  else
-    case $cross_compiling:$ac_tool_warned in
-yes:)
-{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
-$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
-ac_tool_warned=yes ;;
-esac
-    RANLIB=$ac_ct_RANLIB
-  fi
-else
-  RANLIB="$ac_cv_prog_RANLIB"
-fi
-
-
 for ac_prog in gawk mawk nawk awk
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
@@ -5636,13 +5542,13 @@ if test "${lt_cv_nm_interface+set}" = set; then :
 else
   lt_cv_nm_interface="BSD nm"
   echo "int some_variable = 0;" > conftest.$ac_ext
-  (eval echo "\"\$as_me:$LINENO: $ac_compile\"" >&5)
+  (eval echo "\"\$as_me:5363: $ac_compile\"" >&5)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:$LINENO: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
+  (eval echo "\"\$as_me:5366: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
   (eval "$NM \"conftest.$ac_objext\"" 2>conftest.err > conftest.out)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:$LINENO: output\"" >&5)
+  (eval echo "\"\$as_me:5369: output\"" >&5)
   cat conftest.out >&5
   if $GREP 'External.*some_variable' conftest.out > /dev/null; then
     lt_cv_nm_interface="MS dumpbin"
@@ -6869,7 +6775,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line '$LINENO' "configure"' > conftest.$ac_ext
+  echo '#line 6467 "configure"' > conftest.$ac_ext
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -8152,11 +8058,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:$LINENO: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7729: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   echo "$as_me:7733: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -8505,11 +8411,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:$LINENO: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8053: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   echo "$as_me:8057: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -8610,11 +8516,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:$LINENO: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8158: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   echo "$as_me:8162: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -8665,11 +8571,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:$LINENO: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8213: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   echo "$as_me:8217: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -11150,7 +11056,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11152 "configure"
+#line 10572 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11256,7 +11162,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11258 "configure"
+#line 10672 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -12525,35 +12431,22 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
+# XCOFF defines.
+xcoffsize=
+case "$libbacktrace_cv_sys_filetype" in
+xcoff32) xcoffsize=32 ;;
+xcoff64) xcoffsize=64 ;;
+*)       xcoffsize=unused
+esac
 
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for type equivalent to int8_t" >&5
-$as_echo_n "checking for type equivalent to int8_t... " >&6; }
-  case "$ac_cv_sizeof_char" in
-    1) acx_cv_type_int8_t=char ;;
-    *) as_fn_error "no 8-bit type, please report a bug" "$LINENO" 5
-  esac
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $acx_cv_type_int8_t" >&5
-$as_echo "$acx_cv_type_int8_t" >&6; }
+cat >>confdefs.h <<_ACEOF
+#define BACKTRACE_XCOFF_SIZE $xcoffsize
+_ACEOF
 
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for type equivalent to int16_t" >&5
-$as_echo_n "checking for type equivalent to int16_t... " >&6; }
-  case "$ac_cv_sizeof_int:$ac_cv_sizeof_short" in
-    2:*) acx_cv_type_int16_t=int ;;
-    *:2) acx_cv_type_int16_t=short ;;
-    *) as_fn_error "no 16-bit type, please report a bug" "$LINENO" 5
-  esac
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $acx_cv_type_int16_t" >&5
-$as_echo "$acx_cv_type_int16_t" >&6; }
 
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for type equivalent to int32_t" >&5
-$as_echo_n "checking for type equivalent to int32_t... " >&6; }
-  case "$ac_cv_sizeof_int:$ac_cv_sizeof_long" in
-    4:*) acx_cv_type_int32_t=int ;;
-    *:4) acx_cv_type_int32_t=long ;;
-    *) as_fn_error "no 32-bit type, please report a bug" "$LINENO" 5
-  esac
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $acx_cv_type_int32_t" >&5
-$as_echo "$acx_cv_type_int32_t" >&6; }
+BACKTRACE_SUPPORTED=0
+if test "$backtrace_supported" = "yes"; then
+  BACKTRACE_SUPPORTED=1
 fi
 
 # These tests are here to make the output prettier
